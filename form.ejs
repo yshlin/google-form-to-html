@@ -1,0 +1,181 @@
+<form action="https://docs.google.com<%= path %>/d/<%= action %>/formResponse"
+      target="_self"
+      id="bootstrapForm"
+      method="POST">
+
+    <% if (title) { %>
+        <fieldset>
+            <h2><%= title %><br><small><%= desc %></small></h2>
+        </fieldset>
+    <% } if (askEmail) { %>
+        <fieldset>
+            <label for="emailAddress">Email</label>
+            <div class="form-group">
+                <input id="emailAddress" type="email" name="emailAddress" class="form-control" required>
+            </div>
+        </fieldset>
+    <% } for (const f of fields) { %>
+        <fieldset>
+            <legend><%= f.label %></legend>
+            <div class="form-group">
+                <% if (f.desc) { %>
+                    <p class="help-block"><%= f.desc %></p>
+                <% } if (f.typeid === FT.Short) { %>
+                    <label>
+                        <input id="<%= f.widgets[0].id %>"
+                               type="text"
+                               name="entry.<%= f.widgets[0].id %>"
+                               class="form-control" <%= f.widgets[0].required ? 'required' : '' %>>
+                    </label>
+                <% } if (f.typeid === FT.Paragraph) { %>
+                    <label>
+                        <textarea id="<%= f.widgets[0].id %>"
+                                  name="entry.<%= f.widgets[0].id %>"
+                                  class="form-control" <%= f.widgets[0].required ? 'required' : '' %>></textarea>
+                    </label>
+                <% } if (f.typeid === FT.Choices) {
+                        for (const c of f.widgets[0].options) { %>
+                    <div class="radio">
+                        <% if (c.custom) { %>
+                            <label>
+                                <input type="radio"
+                                       name="entry.<%= f.widgets[0].id %>"
+                                       value="__other_option__" <%= f.widgets[0].required ? 'required' : '' %>>
+                            </label>
+                            <label>
+                                <input type="text"
+                                       name="entry.<%= f.widgets[0].id %>.other_option_response"
+                                       placeholder="其它">
+                            </label>
+                        <% } else { %>
+                            <label>
+                                <input type="radio"
+                                       name="entry.<%= f.widgets[0].id %>"
+                                       value="<%= c.label %>" <%= f.widgets[0].required ? 'required' : '' %>>
+                                <%= c.label %>
+                            </label>
+                        <% } %>
+                    </div>
+                <% }
+                } if (f.typeid === FT.Checkboxes) {
+                        for (const c of f.widgets[0].options) { %>
+                    <div class="checkbox">
+                        <% if (c.custom) { %>
+                            <label>
+                                <input type="checkbox"
+                                       name="entry.<%= f.widgets[0].id %>"
+                                       value="__other_option__" <%= f.widgets[0].required ? 'required' : '' %>>
+                            </label>
+                            <label>
+                                <input type="text"
+                                       name="entry.<%= f.widgets[0].id %>.other_option_response"
+                                       placeholder="其它">
+                            </label>
+                        <% } else { %>
+                            <label>
+                                <input type="checkbox"
+                                       name="entry.<%= f.widgets[0].id %>"
+                                       value="<%= c.label %>" <%= f.widgets[0].required ? 'required' : '' %>>
+                                <%= c.label %>
+                            </label>
+                        <% } %>
+                    </div>
+                <% }
+                } if (f.typeid === FT.Dropdown) { %>
+                    <label>
+                        <select id="<%= f.id %>" name="entry.<%= f.widgets[0].id %>" class="form-control">
+                            <% if (!f.widgets[0].required) { %>
+                                <option value=""></option>
+                            <% } for (const c of f.widgets[0].options) { %>
+                                <option value="<%= c.label %>"><%= c.label %></option>
+                            <% } %>
+                        </select>
+                    </label>
+                <% } if (f.typeid === FT.Linear) { %>
+                    <div>
+                        <% for (const c of f.widgets[0].options) { %>
+                            <label class="radio-inline">
+                                <input type="radio"
+                                       name="entry.<%= f.widgets[0].id %>"
+                                       value="<%= c.label %>" <%= f.widgets[0].required ? 'required' : '' %>>
+                                <%= c.label %>
+                            </label>
+                        <% } %>
+                    </div>
+                    <div>
+                        <div><%= f.widgets[0].options[0]['label'] %>:
+                            <%= f.widgets[0].legend.first %>
+                        </div>
+                        <div><%= f.widgets[0].options[f.widgets[0].options.length - 1]['label'] %>:
+                            <%= f.widgets[0].legend.last %>
+                        </div>
+                    </div>
+                <% } if (f.typeid === FT.Grid) {
+                        for (const w of f.widgets) { %>
+                    <div>
+                        <span><%= w.name %>: </span>
+                        <% for (const c of w.columns) { %>
+                            <label class="radio-inline">
+                                <input type="radio"
+                                       name="entry.<%= w.id %>"
+                                       value="<%= c.label %>" <%= w.required ? 'required' : '' %>>
+                                <% c.label %>
+                            </label>
+                        <% } %>
+                    </div>
+                <% }
+                    // } if (f.typeid === FT.Title) {
+                    // } if (f.typeid === FT.Section) {
+                } if (f.typeid === FT.Date) { %>
+                    <label>
+                        <input type="date"
+                               id="<%= f.widgets[0].id %>_date"
+                               placeholder="<%#_ datePlaceholder %>"
+                               class="form-control" <%= f.widgets[0].required ? 'required' : '' %>>
+                    </label>
+                    <% if (f.widgets[0].options.time) { %>
+                        <label>
+                            <input type="time"
+                                   id="<%= f.widgets[0].id %>_time"
+                                   placeholder="<%#_ timePlaceholder %>"
+                                   class="form-control" <%= f.widgets[0].required ? 'required' : '' %>>
+                        </label>
+                <% }
+                } if (f.typeid === FT.Time) { %>
+                    <label>
+                        <input type="time"
+                               id="<%= f.widgets[0].id %>"
+                               placeholder="<%#_ timePlaceholder %>"
+                               class="form-control" <%= f.widgets[0].required ? 'required' : '' %>>
+                    </label>
+                <% } if (f.typeid === FT.Image) {
+                if (f.widgets[0].src) { %>
+                    <img src="<%= f.widgets[0].src %>" style="max-width: 100%;" alt="">
+                <% }
+                } if (f.typeid === FT.Video) {
+                if (f.widgets[0].src) { %>
+                    <iframe src="<% f.widgets[0].src %>" style="width: 320px; height: 180px;"></iframe>
+                <% }
+                } if (f.typeid === FT.Upload) { %>
+                    <div>File upload is not yet implemented. Any help is welcome!</div>
+                <% } %>
+            </div>
+        </fieldset>
+    <% } %>
+
+    <!-- emptyline -->
+    <input type="hidden" name="fvv" value="1">
+    <input type="hidden" name="fbzx" value="<%= fbzx %>">
+
+    <!--
+        CAVEAT: In multipages (multisection) forms, *pageHistory* field tells to google what sections we've currently completed.
+        This usually starts as "0" for the first page, then "0,1" in the second page... up to "0,1,2..N" in n-th page.
+        Keep this in mind if you plan to change this code to recreate any sort of multipage-feature in your exported form.
+
+        We're setting this to the total number of pages in this form because we're sending all fields from all the section together.
+    -->
+    <input type="hidden" name="pageHistory" value="<%= 0 %>">
+
+    <!-- emptyline -->
+    <input class="btn btn-primary" type="submit" value="Submit">
+</form>

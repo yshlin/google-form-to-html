@@ -1,0 +1,44 @@
+{
+  "name": "google-form-to-html",
+  "version": "1.0.0",
+  "description": "Export google form fields to clean and fully functional HTML form for customization.",
+  "main": "form.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yshlin/google-form-to-html.git"
+  },
+  "keywords": [
+    "custom",
+    "google",
+    "form",
+    "html"
+  ],
+  "author": "Eddie Lin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yshlin/google-form-to-html/issues"
+  },
+  "homepage": "https://github.com/yshlin/google-form-to-html#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "file-fetch": "^1.6.1",
+    "jquery": "^3.6.0",
+    "jquery-form": "^4.3.0",
+    "jsdom": "^16.6.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.4",
+    "babel-jest": "^27.0.2",
+    "jest": "^27.0.3"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  }
+}
