@@ -19,9 +19,9 @@ In order to provide easy-to-use package, the plan (WIP) is to provide:
 
 ## What if I want to contribute?
 This repo is pure JS-based, so it requires fewer dependencies and lower maintenance barrier:
- * Converter: ES6 Javascript both compatible with browser and node.js
- * Template engine: EJS
- * Form handling script: Javascript with JQuery and JQuery-forms plugin 
+ * Form converter: ES6 Javascript both compatible with browser and node.js
+ * Template engine: [EJS](https://ejs.co/)
+ * Ajax form submission script: Javascript with [JQuery](https://jquery.com/) and [JQuery-form](https://github.com/jquery-form/form) plugin 
 
 ## What if Google Form changed its implementation?
 This is something to consider when relying on implementation that didn't officially get published as API.
