@@ -1,4 +1,5 @@
-# Google Form to HTML
+# Google Form to HTML [![Actions Status: test](https://github.com/yshlin/google-form-to-html/actions/workflows/main.yml/badge.svg)](https://github.com/yshlin/google-form-to-html/actions/workflows/main.yml)
+
 Ported from [cybercase/google-forms-html-exporter](https://github.com/cybercase/google-forms-html-exporter).
 
 ## What does it do?
@@ -24,4 +25,4 @@ This repo is pure JS-based, so it requires fewer dependencies and lower maintena
 
 ## What if Google Form changed its implementation?
 This is something to consider when relying on implementation that didn't officially get published as API.
-Hopefully a daily scheduled test can inform us when it happens. 
+Hopefully a daily scheduled test can inform us soon enough when that happens. 
