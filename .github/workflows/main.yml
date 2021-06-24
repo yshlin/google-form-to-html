@@ -5,9 +5,9 @@ name: test
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ main ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ main ]
   schedule:
   - cron: "0 22 * * *"
   workflow_dispatch:
